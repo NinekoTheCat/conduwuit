@@ -54,6 +54,11 @@ sentry_telemetry = []
 conduwuit_mods = [
     "dep:libloading"
 ]
+[target.'cfg(target_os = "windows")'.features]
+windows = []
+[target.'cfg(target_os = "windows")'.dependencies.windows]
+version = "0.58"
+features = [    "Storage"]
 
 [dependencies]
 argon2.workspace = true

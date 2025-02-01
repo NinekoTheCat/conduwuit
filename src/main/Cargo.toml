@@ -34,14 +34,20 @@ assets = [
 	["../../conduwuit-example.toml", "etc/conduwuit/conduwuit.toml", "640"],
 ]
 
+[target.'cfg(not(target_os = "windows"))'.features]
+default = ["uni_default",	"jemalloc",
+	"jemalloc_conf"]
+
+[target.'cfg(target_os = "windows")'.features]
+default = ["uni_default"]
+
 [features]
-default = [
+#universal default features
+uni_default = [
 	"brotli_compression",
 	"element_hacks",
 	"gzip_compression",
 	"io_uring",
-	"jemalloc",
-	"jemalloc_conf",
 	"media_thumbnail",
 	"release_max_log_level",
 	"systemd",
