@@ -1,6 +1,7 @@
 use std::{fmt::Display, io::Cursor, path::Path};
 
 use blurhash::encode_image;
+use conduwuit::config::BlurhashConfig as CoreBlurhashConfig;
 use image::{DynamicImage, ImageDecoder, ImageError, ImageFormat, ImageReader};
 
 /// Returns the blurhash or a blurhash error which implements Display.
@@ -69,6 +70,12 @@ pub struct BlurhashConfig {
 	components_y: u32,
 	/// size limit in bytes
 	size_limit: u64,
+}
+
+impl From<CoreBlurhashConfig> for BlurhashConfig {
+	fn from(value: CoreBlurhashConfig) -> Self {
+		Self { components_x: value.components_x, components_y: value.components_y, size_limit: value.blurhash_max_raw_size }
+	}
 }
 
 #[derive(Debug)]
