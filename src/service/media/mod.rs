@@ -4,7 +4,8 @@ mod preview;
 mod remote;
 mod tests;
 mod thumbnail;
-
+#[cfg(feature="blurhashing")]
+pub mod blurhash;
 use std::{path::PathBuf, sync::Arc, time::SystemTime};
 
 use async_trait::async_trait;
@@ -76,7 +77,7 @@ impl crate::Service for Service {
 
 	fn name(&self) -> &str { crate::service::make_name(std::module_path!()) }
 }
-
+ 
 impl Service {
 	/// Uploads a file.
 	pub async fn create(
