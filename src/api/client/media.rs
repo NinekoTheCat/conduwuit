@@ -82,16 +82,15 @@ pub(crate) async fn create_content_route(
 				blurhash,
 			});
 		}
-		
 	}
-		services
-			.media
-			.create(&mxc, Some(user), Some(&content_disposition), content_type, &body.file)
-			.await
-			.map(|()| create_content::v3::Response {
-				content_uri: mxc.to_string().into(),
-				blurhash: None,
-			})
+	services
+		.media
+		.create(&mxc, Some(user), Some(&content_disposition), content_type, &body.file)
+		.await
+		.map(|()| create_content::v3::Response {
+			content_uri: mxc.to_string().into(),
+			blurhash: None,
+		})
 }
 
 /// # `GET /_matrix/client/v1/media/thumbnail/{serverName}/{mediaId}`
