@@ -4,12 +4,11 @@ use blurhash::encode_image;
 use conduwuit::{config::BlurhashConfig as CoreBlurhashConfig, implement, trace};
 use image::{DynamicImage, ImageDecoder, ImageError, ImageFormat, ImageReader};
 use conduwuit::debug_error;
-use crate::Services;
 
 use super::Service;
 #[implement(Service)]
-pub async fn create_blurhash(self,services: &Services, file: &[u8], content_type: Option<&str>, file_name: Option<&str>)-> Option<String> {
-	let config = BlurhashConfig::from(services.config.blurhashing_config);
+pub async fn create_blurhash(self, file: &[u8], content_type: Option<&str>, file_name: Option<&str>)-> Option<String> {
+	let config = BlurhashConfig::from(self.services.server.config.blurhashing_config);
 	if config.size_limit <= 0 {
 		trace!("since 0 means disabled blurhashing, skipped blurhashing logic");
 		return None;
