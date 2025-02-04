@@ -7,7 +7,7 @@ use conduwuit::debug_error;
 
 use super::Service;
 #[implement(Service)]
-pub async fn create_blurhash(self, file: &[u8], content_type: Option<&str>, file_name: Option<&str>)-> Option<String> {
+pub async fn create_blurhash(&self, file: &[u8], content_type: Option<&str>, file_name: Option<&str>)-> Option<String> {
 	let config = BlurhashConfig::from(self.services.server.config.blurhashing_config);
 	if config.size_limit <= 0 {
 		trace!("since 0 means disabled blurhashing, skipped blurhashing logic");
