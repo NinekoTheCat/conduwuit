@@ -1858,7 +1858,7 @@ pub struct BlurhashConfig {
 	/// Max raw size that the server will blurhash, this is the size of the image after converting it to raw data, 
 	/// it should be higher than the upload limit but not too high. 
 	/// The higher it is the higher the potential load will be for clients requesting blurhashes.
-	/// The default is 33.55MB.
+	/// The default is 33.55MB. Setting it to 0 disables blurhashing.
 	/// 
 	/// default: 33554432
 	#[serde(default = "default_blurhash_max_raw_size")]

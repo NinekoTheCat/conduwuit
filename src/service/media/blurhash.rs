@@ -1,11 +1,40 @@
-use std::{fmt::Display, io::Cursor, path::Path};
+use std::{fmt::Display, io::Cursor, ops::Deref, path::Path,};
 
 use blurhash::encode_image;
-use conduwuit::config::BlurhashConfig as CoreBlurhashConfig;
+use conduwuit::{config::BlurhashConfig as CoreBlurhashConfig, implement, trace};
 use image::{DynamicImage, ImageDecoder, ImageError, ImageFormat, ImageReader};
+use conduwuit::{debug_error,debug_event};
+use crate::Services;
+
+use super::Service;
+#[implement(Service)]
+pub(crate) async fn create_blurhash(services: &Services, file: &[u8], content_type: Option<&str>, file_name: Option<&str>)-> Option<String> {
+	let config = BlurhashConfig::from(services.config.blurhashing_config);
+	if config.size_limit <= 0 {
+		trace!("since 0 means disabled blurhashing, skipped blurhashing logic");
+		return None;
+	}
+	let file_data = file.to_owned();
+	let content_type = content_type.map(String::from);
+	let file_name = file_name.map(String::from);
+
+	let blurhashing_result =  tokio::task::spawn_blocking(move || {
+		get_blurhash_from_request(&file_data.deref(), content_type, file_name, config)
+	}).await.expect("no join error");
+
+	match  blurhashing_result {
+		Ok(result) => Some(result),
+		Err(e) => {
+			debug_error!("Error when blurhashing: {e}");
+			None
+		},
+	}
+
+	
+}
 
 /// Returns the blurhash or a blurhash error which implements Display.
-fn get_blurhash_from_request(data: &[u8], mime: Option<&str>, filename: Option<&str>, config: BlurhashConfig) -> Result<String, BlurhashingError> {
+fn get_blurhash_from_request(data: &[u8], mime: Option<String>, filename: Option<String>, config: BlurhashConfig) -> Result<String, BlurhashingError> {
 	// Get format image is supposed to be in
 	let format = get_format_from_data_mime_and_filename(data, mime, filename)?;
 	// Get the image reader for said image format
@@ -28,15 +57,15 @@ fn get_blurhash_from_request(data: &[u8], mime: Option<&str>, filename: Option<&
 /// Assumes that mime and filename extension won't be for a different file format than file.
 fn get_format_from_data_mime_and_filename(
 	data: &[u8],
-	mime: Option<&str>,
-	filename: Option<&str>,
+	mime: Option<String>,
+	filename: Option<String>,
 ) -> Result<ImageFormat, BlurhashingError> {
 	let mut image_format = None;
 	if let Some(mime) = mime {
 		image_format = ImageFormat::from_mime_type(mime)
 	}
 	if let (Some(filename), None) = (filename, image_format) {
-		if let Some(extension) = Path::new(filename).extension() {
+		if let Some(extension) = Path::new(&filename).extension() {
 			image_format = ImageFormat::from_mime_type(extension.to_string_lossy())
 		}
 	}
