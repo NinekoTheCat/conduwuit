@@ -1,4 +1,4 @@
-use std::{fmt::Display, io::Cursor, ops::Deref, path::Path};
+use std::{fmt::Display, io::Cursor, path::Path};
 
 use blurhash::encode_image;
 use conduwuit::{config::BlurhashConfig as CoreBlurhashConfig, debug_error, implement, trace};
@@ -13,7 +13,7 @@ pub async fn create_blurhash(
 	file_name: Option<&str>,
 ) -> Option<String> {
 	let config = BlurhashConfig::from(self.services.server.config.blurhashing);
-	if config.size_limit <= 0 {
+	if config.size_limit == 0 {
 		trace!("since 0 means disabled blurhashing, skipped blurhashing logic");
 		return None;
 	}
@@ -22,7 +22,7 @@ pub async fn create_blurhash(
 	let file_name = file_name.map(String::from);
 
 	let blurhashing_result = tokio::task::spawn_blocking(move || {
-		get_blurhash_from_request(&file_data.deref(), content_type, file_name, config)
+		get_blurhash_from_request(&file_data, content_type, file_name, config)
 	})
 	.await
 	.expect("no join error");
@@ -54,7 +54,7 @@ fn get_blurhash_from_request(
 	// decode the image finally
 	let image = DynamicImage::from_decoder(decoder)?;
 
-	blurhash_an_image(image, config)
+	blurhash_an_image(&image, config)
 }
 
 /// Gets the Image Format value from the data,mime, and filename
@@ -69,18 +69,18 @@ fn get_format_from_data_mime_and_filename(
 ) -> Result<ImageFormat, BlurhashingError> {
 	let mut image_format = None;
 	if let Some(mime) = mime {
-		image_format = ImageFormat::from_mime_type(mime)
+		image_format = ImageFormat::from_mime_type(mime);
 	}
 	if let (Some(filename), None) = (filename, image_format) {
 		if let Some(extension) = Path::new(&filename).extension() {
-			image_format = ImageFormat::from_mime_type(extension.to_string_lossy())
+			image_format = ImageFormat::from_mime_type(extension.to_string_lossy());
 		}
 	}
 
 	if let Some(format) = image_format {
 		Ok(format)
 	} else {
-		image::guess_format(data).map_err(|e| e.into())
+		image::guess_format(data).map_err(Into::into)
 	}
 }
 
@@ -101,7 +101,7 @@ fn is_image_above_size_limit<T: ImageDecoder>(
 }
 #[inline]
 fn blurhash_an_image(
-	image: DynamicImage,
+	image: &DynamicImage,
 	blurhash_config: BlurhashConfig,
 ) -> Result<String, BlurhashingError> {
 	Ok(encode_image(
@@ -148,10 +148,10 @@ impl Display for BlurhashingError {
 		match &self {
 			| Self::ImageTooLarge => write!(f, "Image was too large to blurhash")?,
 			| Self::HashingLibError(e) =>
-				write!(f, "There was an error with the blurhashing library => {}", e)?,
+				write!(f, "There was an error with the blurhashing library => {e}")?,
 
 			| Self::ImageError(e) =>
-				write!(f, "There was an error with the image loading library => {}", e)?,
+				write!(f, "There was an error with the image loading library => {e}")?,
 		};
 
 		Ok(())
