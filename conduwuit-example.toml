@@ -1610,11 +1610,11 @@
 
 [global.blurhashing]
 
-# blurhashing y component, 4 is recommended by https://blurha.sh/
+# blurhashing x component, 4 is recommended by https://blurha.sh/
 #
 #components_x = 4
 
-# blurhashing y component, 3 is and recommended by https://blurha.sh/
+# blurhashing y component, 3 is recommended by https://blurha.sh/
 #
 #components_y = 3
 
