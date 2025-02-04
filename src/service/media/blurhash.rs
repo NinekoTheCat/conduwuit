@@ -3,12 +3,12 @@ use std::{fmt::Display, io::Cursor, ops::Deref, path::Path,};
 use blurhash::encode_image;
 use conduwuit::{config::BlurhashConfig as CoreBlurhashConfig, implement, trace};
 use image::{DynamicImage, ImageDecoder, ImageError, ImageFormat, ImageReader};
-use conduwuit::{debug_error,debug_event};
+use conduwuit::debug_error;
 use crate::Services;
 
 use super::Service;
 #[implement(Service)]
-pub(crate) async fn create_blurhash(services: &Services, file: &[u8], content_type: Option<&str>, file_name: Option<&str>)-> Option<String> {
+pub async fn create_blurhash(self,services: &Services, file: &[u8], content_type: Option<&str>, file_name: Option<&str>)-> Option<String> {
 	let config = BlurhashConfig::from(services.config.blurhashing_config);
 	if config.size_limit <= 0 {
 		trace!("since 0 means disabled blurhashing, skipped blurhashing logic");
