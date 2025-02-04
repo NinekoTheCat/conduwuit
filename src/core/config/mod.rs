@@ -1846,12 +1846,12 @@ pub struct WellKnownConfig {
 #[allow(rustdoc::broken_intra_doc_links, rustdoc::bare_urls)]
 #[config_example_generator(filename = "conduwuit-example.toml", section = "global.blurhashing")]
 pub struct BlurhashConfig {
-	/// blurhashing y component, 4 is recommended by https://blurha.sh/
+	/// blurhashing x component, 4 is recommended by https://blurha.sh/
 	///
 	/// default: 4
 	#[serde(default = "default_blurhash_x_component")]
 	pub components_x: u32,
-	/// blurhashing y component, 3 is and recommended by https://blurha.sh/
+	/// blurhashing y component, 3 is recommended by https://blurha.sh/
 	///
 	/// default: 3
 	#[serde(default = "default_blurhash_y_component")]
@@ -2241,7 +2241,7 @@ fn default_sender_shutdown_timeout() -> u64 { 5 }
 
 // blurhashing defaults recommended by https://blurha.sh/
 // 2^25
-pub(super) fn default_blurhash_max_raw_size() -> u64 { 33554432 }
+pub(super) fn default_blurhash_max_raw_size() -> u64 { 33_554_432 }
 
 pub(super) fn default_blurhash_x_component() -> u32 { 4 }
 
