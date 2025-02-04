@@ -62,7 +62,18 @@ pub(crate) async fn create_content_route(
 		media_id: &utils::random_string(MXC_LENGTH),
 	};
 
-	services
+	#[cfg(feature="blurhashing")]
+	{
+		let (blurhash,create_media_result) = tokio::join!(services.media.create_blurhash(&body.file,content_type,filename),services.media
+		.create(&mxc, Some(user), Some(&content_disposition), content_type, &body.file)	);
+	create_media_result.map(|()| create_content::v3::Response {
+			content_uri: mxc.to_string().into(),
+			blurhash: blurhash,
+		})
+	}
+	#[cfg(not(feature="blurhashing"))]
+	{
+		services
 		.media
 		.create(&mxc, Some(user), Some(&content_disposition), content_type, &body.file)
 		.await
@@ -70,6 +81,7 @@ pub(crate) async fn create_content_route(
 			content_uri: mxc.to_string().into(),
 			blurhash: None,
 		})
+	}
 }
 
 /// # `GET /_matrix/client/v1/media/thumbnail/{serverName}/{mediaId}`

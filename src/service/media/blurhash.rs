@@ -126,12 +126,12 @@ impl From<blurhash::Error> for BlurhashingError {
 
 impl Display for BlurhashingError {
 	fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-		write!(f,"Blurhash Error:");
+		write!(f,"Blurhash Error:")?;
 		match &self  {
-			Self::ImageTooLarge => write!(f,"Image was too large to blurhash"),
-			Self::HashingLibError(e) => write!(f, "There was an error with the blurhashing library => {}", e),
+			Self::ImageTooLarge => write!(f,"Image was too large to blurhash")?,
+			Self::HashingLibError(e) => write!(f, "There was an error with the blurhashing library => {}", e)?,
 	
-			Self::ImageError(e) => write!(f, "There was an error with the image loading library => {}", e)
+			Self::ImageError(e) => write!(f, "There was an error with the image loading library => {}", e)?
 			
 		};
 
