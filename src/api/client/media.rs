@@ -3,9 +3,7 @@ use std::time::Duration;
 use axum::extract::State;
 use axum_client_ip::InsecureClientIp;
 use conduwuit::{
-	err,
-	utils::{self, content_disposition::make_content_disposition, math::ruma_from_usize},
-	Err, Result,
+	debug, err, utils::{self, content_disposition::make_content_disposition, math::ruma_from_usize}, Err, Result
 };
 use conduwuit_service::{
 	media::{Dim, FileMeta, CACHE_CONTROL_IMMUTABLE, CORP_CROSS_ORIGIN, MXC_LENGTH},
@@ -61,7 +59,7 @@ pub(crate) async fn create_content_route(
 		server_name: services.globals.server_name(),
 		media_id: &utils::random_string(MXC_LENGTH),
 	};
-
+	debug!("{}",body.generate_blurhash);
 	services
 		.media
 		.create(mxc, Some(user), Some(&content_disposition), content_type, &body.file)

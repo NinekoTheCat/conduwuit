@@ -1,0 +1,26 @@
+#!/usr/bin/env zsh
+set -x
+set -euo pipefail
+GO_SETTINGS="$@"
+OCI_IMAGE="complement-conduwuit:main"
+# Complement tests that are skipped due to flakiness/reliability issues
+SKIPPED_COMPLEMENT_TESTS='-skip=TestClientSpacesSummary.*|TestJoinFederatedRoomFromApplicationServiceBridgeUser.*|TestJumpToDateEndpoint.*|TestUnbanViaInvite.*'
+
+if [ -f "$COMPLEMENT_SRC" ]; then
+    echo "\$COMPLEMENT_SRC must be a directory/path to Complement source code"
+    exit 1
+fi
+toplevel="$(git rev-parse --show-toplevel)"
+
+pushd "$toplevel" > /dev/null
+
+bin/nix-build-and-cache just .#complement
+pv -f result | docker load
+popd > /dev/null
+env \
+    -C "$COMPLEMENT_SRC" \
+    COMPLEMENT_BASE_IMAGE="$OCI_IMAGE" \
+    go test -v \
+        $GO_SETTINGS \
+        -tags="conduwuit_blacklist" "$SKIPPED_COMPLEMENT_TESTS" \
+     | tee /dev/null
