@@ -3,7 +3,7 @@ use std::time::Duration;
 use axum::extract::State;
 use axum_client_ip::InsecureClientIp;
 use conduwuit::{
-	debug, err, utils::{self, content_disposition::make_content_disposition, math::ruma_from_usize}, Err, Result
+	err, utils::{self, content_disposition::make_content_disposition, math::ruma_from_usize}, Err, Result
 };
 use conduwuit_service::{
 	media::{Dim, FileMeta, CACHE_CONTROL_IMMUTABLE, CORP_CROSS_ORIGIN, MXC_LENGTH},
