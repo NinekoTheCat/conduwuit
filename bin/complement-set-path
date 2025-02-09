@@ -1,7 +1,6 @@
 #!/usr/bin/env zsh
 set -x
 set -euo pipefail
-GO_SETTINGS="$@"
 OCI_IMAGE="complement-conduwuit:main"
 # Complement tests that are skipped due to flakiness/reliability issues
 SKIPPED_COMPLEMENT_TESTS='-skip=TestClientSpacesSummary.*|TestJoinFederatedRoomFromApplicationServiceBridgeUser.*|TestJumpToDateEndpoint.*|TestUnbanViaInvite.*'
@@ -21,6 +20,5 @@ env \
     -C "$COMPLEMENT_SRC" \
     COMPLEMENT_BASE_IMAGE="$OCI_IMAGE" \
     go test -v \
-        $GO_SETTINGS \
-        -tags="conduwuit_blacklist" "$SKIPPED_COMPLEMENT_TESTS" \
-     | tee /dev/null
+        $@ \
+        -tags="conduwuit_blacklist" "$SKIPPED_COMPLEMENT_TESTS"
