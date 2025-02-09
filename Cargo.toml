@@ -792,7 +792,7 @@ inherits = "dev"
 strip = false
 opt-level = 0
 codegen-units = 16
-incremental = false
+incremental = true
 
 [profile.test.package.'*']
 inherits = "dev"

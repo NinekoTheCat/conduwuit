@@ -1,6 +1,6 @@
 [package]
-name = "conduwuit"
-default-run = "conduwuit"
+name = "tuwunel"
+default-run = "tuwunel"
 authors.workspace = true
 categories.workspace = true
 description.workspace = true
@@ -15,7 +15,7 @@ version.workspace = true
 metadata.crane.workspace = true
 
 [package.metadata.deb]
-name = "conduwuit"
+name = "tuwunel"
 maintainer = "strawberry <strawberry@puppygock.gay>"
 copyright = "2024, strawberry <strawberry@puppygock.gay>"
 license-file = ["../../LICENSE", "3"]
@@ -189,5 +189,5 @@ hardened_malloc-rs.optional = true
 workspace = true
 
 [[bin]]
-name = "conduwuit"
+name = "tuwunel"
 path = "main.rs"
