@@ -1842,7 +1842,7 @@ pub struct WellKnownConfig {
 	pub support_mxid: Option<OwnedUserId>,
 }
 
-#[derive(Clone, Copy, Debug, Deserialize, Default)]
+#[derive(Clone, Copy, Debug, Deserialize)]
 #[allow(rustdoc::broken_intra_doc_links, rustdoc::bare_urls)]
 #[config_example_generator(filename = "conduwuit-example.toml", section = "global.blurhashing")]
 pub struct BlurhashConfig {
@@ -1865,6 +1865,15 @@ pub struct BlurhashConfig {
 	/// default: 33554432
 	#[serde(default = "default_blurhash_max_raw_size")]
 	pub blurhash_max_raw_size: u64,
+}
+
+impl Default for BlurhashConfig {
+	fn default() -> Self {
+		Self { 
+			components_x: default_blurhash_x_component(), 
+			components_y: default_blurhash_y_component(), 
+			blurhash_max_raw_size: default_blurhash_max_raw_size() }
+	}
 }
 
 #[derive(Deserialize, Clone, Debug)]
