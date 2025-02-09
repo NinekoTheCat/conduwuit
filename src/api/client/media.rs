@@ -59,7 +59,6 @@ pub(crate) async fn create_content_route(
 		server_name: services.globals.server_name(),
 		media_id: &utils::random_string(MXC_LENGTH),
 	};
-	debug!("{}",body.generate_blurhash);
 	services
 		.media
 		.create(mxc, Some(user), Some(&content_disposition), content_type, &body.file)
