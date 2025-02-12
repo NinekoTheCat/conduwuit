@@ -25,3 +25,6 @@ rustfmt.toml
 
 # Documentation
 #*.md
+
+# direenv
+.direenv

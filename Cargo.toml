@@ -794,6 +794,30 @@ opt-level = 0
 codegen-units = 16
 incremental = true
 
+# do not use without profile-rustflags enabled
+[profile.test-max-perf]
+inherits = "dev"
+strip = false
+lto = "fat"
+#rustflags = [
+#	'-Ctarget-cpu=native',
+#	'-Ztune-cpu=native',
+#	'-Ctarget-feature=+crt-static',
+#	'-Crelocation-model=static',
+#	'-Ztls-model=local-exec',
+#	'-Zinline-in-all-cgus=true',
+#	'-Zinline-mir=true',
+#	'-Zmir-opt-level=3',
+#	'-Clink-arg=-fuse-ld=gold',
+#	'-Clink-arg=-Wl,--threads',
+#	'-Clink-arg=-Wl,--gc-sections',
+#	'-Clink-arg=-luring',
+#	'-Clink-arg=-lstdc++',
+#	'-Clink-arg=-lc',
+#	'-Ztime-passes',
+#	'-Ztime-llvm-passes',
+#]
+
 [profile.test.package.'*']
 inherits = "dev"
 debug = 0

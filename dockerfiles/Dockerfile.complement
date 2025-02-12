@@ -1,18 +1,10 @@
-FROM alpine/openssl:latest AS key_generator
-WORKDIR /usr/src/tuwunel
-COPY ./dockerfiles/scripts/generate-certificates.sh .
-RUN chmod +x  ./generate-certificates.sh
-RUN ./generate-certificates.sh
-FROM tuwunel-test:latest AS builder
-
-FROM debian:stable-slim
-COPY --from=key_generator /usr/src/tuwunel .
-COPY --from=builder /usr/local/cargo/bin/tuwunel /usr/local/bin/tuwunel
-WORKDIR /usr/src/tuwunel
-
-RUN useradd -r tuwunel
-USER tuwunel
-WORKDIR /home/tuwunel/
+FROM base-test
+COPY --from=key_generator /usr/src/conduwuit .
+COPY --from=builder /usr/local/cargo/bin/conduwuit /usr/local/bin/conduwuit
+WORKDIR /usr/src/conduwuit
+RUN useradd -r conduwuit
+USER conduwuit
+WORKDIR /home/conduwuit/
 COPY ./dockerfiles/configs/complement.toml .
 EXPOSE 8008 8448
-ENTRYPOINT [ "tuwunel" ]
+ENTRYPOINT [ "conduwuit" ]

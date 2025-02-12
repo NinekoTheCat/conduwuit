@@ -1,571 +1,0 @@
-#0 building with "default" instance using docker driver
-
-#1 [internal] load build definition from Dockerfile.base
-#1 transferring dockerfile: 646B done
-#1 DONE 0.0s
-
-#2 [internal] load metadata for docker.io/clux/muslrust:stable
-#2 DONE 0.4s
-
-#3 [internal] load .dockerignore
-#3 transferring context: 269B done
-#3 DONE 0.0s
-
-#4 [chef 1/5] FROM docker.io/clux/muslrust:stable@sha256:ce1580cadb72cc218cc525cff3c1b2b3494abbb9a992c804841faeaa6e6654ab
-#4 CACHED
-
-#5 [internal] load build context
-#5 transferring context: 406.69MB 5.4s
-#5 transferring context: 750.41MB 10.0s done
-#5 ...
-
-#6 [chef 2/5] RUN apt-get update && apt-get install -y librocksdb-dev clang liburing-dev musl gcc
-#6 2.582 Get:1 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
-#6 2.646 Get:2 http://archive.ubuntu.com/ubuntu jammy InRelease [270 kB]
-#6 2.916 Get:3 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [3606 kB]
-#6 3.179 Get:4 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [2606 kB]
-#6 3.180 Get:5 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
-#6 3.236 Get:6 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [1230 kB]
-#6 3.252 Get:7 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [45.2 kB]
-#6 3.350 Get:8 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [127 kB]
-#6 3.417 Get:9 http://archive.ubuntu.com/ubuntu jammy/multiverse amd64 Packages [266 kB]
-#6 3.488 Get:10 http://archive.ubuntu.com/ubuntu jammy/universe amd64 Packages [17.5 MB]
-#6 3.815 Get:11 http://archive.ubuntu.com/ubuntu jammy/restricted amd64 Packages [164 kB]
-#6 3.851 Get:12 http://archive.ubuntu.com/ubuntu jammy/main amd64 Packages [1792 kB]
-#6 3.916 Get:13 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [2907 kB]
-#6 3.985 Get:14 http://archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [3742 kB]
-#6 4.103 Get:15 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [1523 kB]
-#6 4.159 Get:16 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [53.3 kB]
-#6 4.193 Get:17 http://archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [35.2 kB]
-#6 4.227 Get:18 http://archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [81.4 kB]
-#6 5.374 Fetched 36.2 MB in 3s (14.2 MB/s)
-#6 5.374 Reading package lists...
-#6 7.115 Reading package lists...
-#6 8.036 Building dependency tree...
-#6 8.202 Reading state information...
-#6 8.421 gcc is already the newest version (4:11.2.0-1ubuntu1).
-#6 8.421 gcc set to manually installed.
-#6 8.421 musl is already the newest version (1.2.2-4).
-#6 8.421 musl set to manually installed.
-#6 8.421 The following additional packages will be installed:
-#6 8.421   binfmt-support clang-14 icu-devtools lib32gcc-s1 lib32stdc++6 libc-dev-bin
-#6 8.421   libc6 libc6-dev libc6-i386 libclang-common-14-dev libclang-cpp14
-#6 8.422   libclang1-14 libffi-dev libgc1 libgflags2.2 libicu-dev libllvm14 libmpdec3
-#6 8.422   libncurses-dev libobjc-11-dev libobjc4 libpfm4 libpipeline1
-#6 8.422   libpython3-stdlib libpython3.10-minimal libpython3.10-stdlib libreadline8
-#6 8.422   librocksdb6.11 libsnappy1v5 libsqlite3-0 libtinfo-dev liburing2 libxml2
-#6 8.422   libxml2-dev libyaml-0-2 libz3-4 libz3-dev llvm-14 llvm-14-dev
-#6 8.422   llvm-14-linker-tools llvm-14-runtime llvm-14-tools media-types python3
-#6 8.422   python3-minimal python3-pkg-resources python3-pygments python3-yaml
-#6 8.423   python3.10 python3.10-minimal readline-common
-#6 8.424 Suggested packages:
-#6 8.424   clang-14-doc glibc-doc locales manpages-dev icu-doc ncurses-doc llvm-14-doc
-#6 8.424   python3-doc python3-tk python3-venv python3-setuptools python-pygments-doc
-#6 8.424   ttf-bitstream-vera python3.10-venv python3.10-doc readline-doc
-#6 8.424 Recommended packages:
-#6 8.424   manpages manpages-dev libc-devtools libnss-nis libnss-nisplus
-#6 8.572 The following NEW packages will be installed:
-#6 8.573   binfmt-support clang clang-14 icu-devtools lib32gcc-s1 lib32stdc++6
-#6 8.573   libc6-i386 libclang-common-14-dev libclang-cpp14 libclang1-14 libffi-dev
-#6 8.573   libgc1 libgflags2.2 libicu-dev libllvm14 libmpdec3 libncurses-dev
-#6 8.573   libobjc-11-dev libobjc4 libpfm4 libpipeline1 libpython3-stdlib
-#6 8.573   libpython3.10-minimal libpython3.10-stdlib libreadline8 librocksdb-dev
-#6 8.574   librocksdb6.11 libsnappy1v5 libsqlite3-0 libtinfo-dev liburing-dev liburing2
-#6 8.574   libxml2-dev libyaml-0-2 libz3-4 libz3-dev llvm-14 llvm-14-dev
-#6 8.574   llvm-14-linker-tools llvm-14-runtime llvm-14-tools media-types python3
-#6 8.574   python3-minimal python3-pkg-resources python3-pygments python3-yaml
-#6 8.574   python3.10 python3.10-minimal readline-common
-#6 8.575 The following packages will be upgraded:
-#6 8.576   libc-dev-bin libc6 libc6-dev libxml2
-#6 8.795 4 upgraded, 50 newly installed, 0 to remove and 11 not upgraded.
-#6 8.795 Need to get 143 MB of archives.
-#6 8.795 After this operation, 759 MB of additional disk space will be used.
-#6 8.795 Get:1 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libc6-dev amd64 2.35-0ubuntu3.9 [2100 kB]
-#6 9.628 Get:2 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libc-dev-bin amd64 2.35-0ubuntu3.9 [20.3 kB]
-#6 9.631 Get:3 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libc6 amd64 2.35-0ubuntu3.9 [3235 kB]
-#6 9.781 Get:4 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libpython3.10-minimal amd64 3.10.12-1~22.04.8 [815 kB]
-#6 9.829 Get:5 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3.10-minimal amd64 3.10.12-1~22.04.8 [2268 kB]
-#6 9.873 Get:6 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3-minimal amd64 3.10.6-1~22.04.1 [24.3 kB]
-#6 9.875 Get:7 http://archive.ubuntu.com/ubuntu jammy/main amd64 media-types all 7.0.0 [25.5 kB]
-#6 9.876 Get:8 http://archive.ubuntu.com/ubuntu jammy/main amd64 libmpdec3 amd64 2.5.1-2build2 [86.8 kB]
-#6 9.876 Get:9 http://archive.ubuntu.com/ubuntu jammy/main amd64 readline-common all 8.1.2-1 [53.5 kB]
-#6 9.879 Get:10 http://archive.ubuntu.com/ubuntu jammy/main amd64 libreadline8 amd64 8.1.2-1 [153 kB]
-#6 9.881 Get:11 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libsqlite3-0 amd64 3.37.2-2ubuntu0.3 [641 kB]
-#6 9.887 Get:12 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libpython3.10-stdlib amd64 3.10.12-1~22.04.8 [1850 kB]
-#6 9.973 Get:13 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3.10 amd64 3.10.12-1~22.04.8 [508 kB]
-#6 10.02 Get:14 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libpython3-stdlib amd64 3.10.6-1~22.04.1 [6812 B]
-#6 10.02 Get:15 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3 amd64 3.10.6-1~22.04.1 [22.8 kB]
-#6 10.02 Get:16 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libxml2 amd64 2.9.13+dfsg-1ubuntu0.5 [763 kB]
-#6 10.04 Get:17 http://archive.ubuntu.com/ubuntu jammy/main amd64 libyaml-0-2 amd64 0.2.2-1build2 [51.6 kB]
-#6 10.04 Get:18 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3-pkg-resources all 59.6.0-1.2ubuntu0.22.04.2 [133 kB]
-#6 10.05 Get:19 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-yaml amd64 5.4.1-1ubuntu1 [129 kB]
-#6 10.08 Get:20 http://archive.ubuntu.com/ubuntu jammy/main amd64 libpipeline1 amd64 1.5.5-1 [23.5 kB]
-#6 10.09 Get:21 http://archive.ubuntu.com/ubuntu jammy/main amd64 binfmt-support amd64 2.2.1-2 [55.8 kB]
-#6 10.11 Get:22 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libllvm14 amd64 1:14.0.0-1ubuntu1.1 [24.0 MB]
-#6 ...
-
-#5 [internal] load build context
-#5 DONE 10.4s
-
-#6 [chef 2/5] RUN apt-get update && apt-get install -y librocksdb-dev clang liburing-dev musl gcc
-#6 10.86 Get:23 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 libclang-cpp14 amd64 1:14.0.0-1ubuntu1.1 [12.1 MB]
-#6 11.16 Get:24 http://archive.ubuntu.com/ubuntu jammy/main amd64 libgc1 amd64 1:8.0.6-1.1build1 [96.8 kB]
-#6 11.16 Get:25 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 libobjc4 amd64 12.3.0-1ubuntu1~22.04 [48.6 kB]
-#6 11.16 Get:26 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 libobjc-11-dev amd64 11.4.0-1ubuntu1~22.04 [196 kB]
-#6 11.17 Get:27 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libc6-i386 amd64 2.35-0ubuntu3.9 [2838 kB]
-#6 11.22 Get:28 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 lib32gcc-s1 amd64 12.3.0-1ubuntu1~22.04 [63.9 kB]
-#6 11.22 Get:29 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 lib32stdc++6 amd64 12.3.0-1ubuntu1~22.04 [740 kB]
-#6 11.24 Get:30 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 libclang-common-14-dev amd64 1:14.0.0-1ubuntu1.1 [5975 kB]
-#6 11.43 Get:31 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 llvm-14-linker-tools amd64 1:14.0.0-1ubuntu1.1 [1355 kB]
-#6 11.45 Get:32 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 libclang1-14 amd64 1:14.0.0-1ubuntu1.1 [6792 kB]
-#6 11.76 Get:33 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 clang-14 amd64 1:14.0.0-1ubuntu1.1 [81.2 kB]
-#6 11.76 Get:34 http://archive.ubuntu.com/ubuntu jammy/universe amd64 clang amd64 1:14.0-55~exp2 [3558 B]
-#6 11.76 Get:35 http://archive.ubuntu.com/ubuntu jammy/main amd64 icu-devtools amd64 70.1-2 [197 kB]
-#6 11.77 Get:36 http://archive.ubuntu.com/ubuntu jammy/universe amd64 libgflags2.2 amd64 2.2.2-2 [78.1 kB]
-#6 11.77 Get:37 http://archive.ubuntu.com/ubuntu jammy/main amd64 libicu-dev amd64 70.1-2 [11.6 MB]
-#6 12.06 Get:38 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libncurses-dev amd64 6.3-2ubuntu0.1 [381 kB]
-#6 12.06 Get:39 http://archive.ubuntu.com/ubuntu jammy/main amd64 libsnappy1v5 amd64 1.1.8-1build3 [17.5 kB]
-#6 12.06 Get:40 http://archive.ubuntu.com/ubuntu jammy/universe amd64 librocksdb6.11 amd64 6.11.4-3 [1845 kB]
-#6 12.09 Get:41 http://archive.ubuntu.com/ubuntu jammy/universe amd64 librocksdb-dev amd64 6.11.4-3 [2902 kB]
-#6 12.17 Get:42 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libtinfo-dev amd64 6.3-2ubuntu0.1 [780 B]
-#6 12.17 Get:43 http://archive.ubuntu.com/ubuntu jammy/main amd64 liburing2 amd64 2.1-2build1 [10.3 kB]
-#6 12.17 Get:44 http://archive.ubuntu.com/ubuntu jammy/main amd64 liburing-dev amd64 2.1-2build1 [51.8 kB]
-#6 12.17 Get:45 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libxml2-dev amd64 2.9.13+dfsg-1ubuntu0.5 [804 kB]
-#6 12.19 Get:46 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 llvm-14-runtime amd64 1:14.0.0-1ubuntu1.1 [484 kB]
-#6 12.20 Get:47 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libpfm4 amd64 4.11.1+git32-gd0b85fb-1ubuntu0.1 [345 kB]
-#6 12.25 Get:48 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 llvm-14 amd64 1:14.0.0-1ubuntu1.1 [12.7 MB]
-#6 12.55 Get:49 http://archive.ubuntu.com/ubuntu jammy/main amd64 libffi-dev amd64 3.4.2-4 [63.7 kB]
-#6 12.55 Get:50 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3-pygments all 2.11.2+dfsg-2ubuntu0.1 [750 kB]
-#6 12.58 Get:51 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 llvm-14-tools amd64 1:14.0.0-1ubuntu1.1 [404 kB]
-#6 12.59 Get:52 http://archive.ubuntu.com/ubuntu jammy/universe amd64 libz3-4 amd64 4.8.12-1 [5766 kB]
-#6 12.73 Get:53 http://archive.ubuntu.com/ubuntu jammy/universe amd64 libz3-dev amd64 4.8.12-1 [72.2 kB]
-#6 12.73 Get:54 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 llvm-14-dev amd64 1:14.0.0-1ubuntu1.1 [37.8 MB]
-#6 14.06 debconf: delaying package configuration, since apt-utils is not installed
-#6 14.10 Fetched 143 MB in 5s (28.0 MB/s)
-#6 14.14 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 15962 files and directories currently installed.)
-#6 14.30 Preparing to unpack .../libc6-dev_2.35-0ubuntu3.9_amd64.deb ...
-#6 14.32 Unpacking libc6-dev:amd64 (2.35-0ubuntu3.9) over (2.35-0ubuntu3.8) ...
-#6 17.77 Preparing to unpack .../libc-dev-bin_2.35-0ubuntu3.9_amd64.deb ...
-#6 17.79 Unpacking libc-dev-bin (2.35-0ubuntu3.9) over (2.35-0ubuntu3.8) ...
-#6 17.90 Preparing to unpack .../libc6_2.35-0ubuntu3.9_amd64.deb ...
-#6 18.06 Unpacking libc6:amd64 (2.35-0ubuntu3.9) over (2.35-0ubuntu3.8) ...
-#6 20.03 Setting up libc6:amd64 (2.35-0ubuntu3.9) ...
-#6 21.18 Selecting previously unselected package libpython3.10-minimal:amd64.
-#6 21.18 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 15962 files and directories currently installed.)
-#6 21.19 Preparing to unpack .../libpython3.10-minimal_3.10.12-1~22.04.8_amd64.deb ...
-#6 21.20 Unpacking libpython3.10-minimal:amd64 (3.10.12-1~22.04.8) ...
-#6 21.27 Selecting previously unselected package python3.10-minimal.
-#6 21.28 Preparing to unpack .../python3.10-minimal_3.10.12-1~22.04.8_amd64.deb ...
-#6 21.29 Unpacking python3.10-minimal (3.10.12-1~22.04.8) ...
-#6 21.43 Setting up libpython3.10-minimal:amd64 (3.10.12-1~22.04.8) ...
-#6 21.45 Setting up python3.10-minimal (3.10.12-1~22.04.8) ...
-#6 22.06 Selecting previously unselected package python3-minimal.
-#6 22.06 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16258 files and directories currently installed.)
-#6 22.06 Preparing to unpack .../0-python3-minimal_3.10.6-1~22.04.1_amd64.deb ...
-#6 22.07 Unpacking python3-minimal (3.10.6-1~22.04.1) ...
-#6 22.10 Selecting previously unselected package media-types.
-#6 22.10 Preparing to unpack .../1-media-types_7.0.0_all.deb ...
-#6 22.10 Unpacking media-types (7.0.0) ...
-#6 22.15 Selecting previously unselected package libmpdec3:amd64.
-#6 22.16 Preparing to unpack .../2-libmpdec3_2.5.1-2build2_amd64.deb ...
-#6 22.16 Unpacking libmpdec3:amd64 (2.5.1-2build2) ...
-#6 22.22 Selecting previously unselected package readline-common.
-#6 22.22 Preparing to unpack .../3-readline-common_8.1.2-1_all.deb ...
-#6 22.23 Unpacking readline-common (8.1.2-1) ...
-#6 22.28 Selecting previously unselected package libreadline8:amd64.
-#6 22.29 Preparing to unpack .../4-libreadline8_8.1.2-1_amd64.deb ...
-#6 22.29 Unpacking libreadline8:amd64 (8.1.2-1) ...
-#6 22.36 Selecting previously unselected package libsqlite3-0:amd64.
-#6 22.36 Preparing to unpack .../5-libsqlite3-0_3.37.2-2ubuntu0.3_amd64.deb ...
-#6 22.37 Unpacking libsqlite3-0:amd64 (3.37.2-2ubuntu0.3) ...
-#6 22.44 Selecting previously unselected package libpython3.10-stdlib:amd64.
-#6 22.44 Preparing to unpack .../6-libpython3.10-stdlib_3.10.12-1~22.04.8_amd64.deb ...
-#6 22.45 Unpacking libpython3.10-stdlib:amd64 (3.10.12-1~22.04.8) ...
-#6 22.57 Selecting previously unselected package python3.10.
-#6 22.57 Preparing to unpack .../7-python3.10_3.10.12-1~22.04.8_amd64.deb ...
-#6 22.57 Unpacking python3.10 (3.10.12-1~22.04.8) ...
-#6 22.61 Selecting previously unselected package libpython3-stdlib:amd64.
-#6 22.61 Preparing to unpack .../8-libpython3-stdlib_3.10.6-1~22.04.1_amd64.deb ...
-#6 22.62 Unpacking libpython3-stdlib:amd64 (3.10.6-1~22.04.1) ...
-#6 22.69 Setting up python3-minimal (3.10.6-1~22.04.1) ...
-#6 22.88 Selecting previously unselected package python3.
-#6 22.88 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 16688 files and directories currently installed.)
-#6 22.89 Preparing to unpack .../00-python3_3.10.6-1~22.04.1_amd64.deb ...
-#6 22.89 Unpacking python3 (3.10.6-1~22.04.1) ...
-#6 22.94 Preparing to unpack .../01-libxml2_2.9.13+dfsg-1ubuntu0.5_amd64.deb ...
-#6 22.95 Unpacking libxml2:amd64 (2.9.13+dfsg-1ubuntu0.5) over (2.9.13+dfsg-1ubuntu0.4) ...
-#6 23.11 Selecting previously unselected package libyaml-0-2:amd64.
-#6 23.11 Preparing to unpack .../02-libyaml-0-2_0.2.2-1build2_amd64.deb ...
-#6 23.12 Unpacking libyaml-0-2:amd64 (0.2.2-1build2) ...
-#6 23.19 Selecting previously unselected package python3-pkg-resources.
-#6 23.19 Preparing to unpack .../03-python3-pkg-resources_59.6.0-1.2ubuntu0.22.04.2_all.deb ...
-#6 23.20 Unpacking python3-pkg-resources (59.6.0-1.2ubuntu0.22.04.2) ...
-#6 23.28 Selecting previously unselected package python3-yaml.
-#6 23.28 Preparing to unpack .../04-python3-yaml_5.4.1-1ubuntu1_amd64.deb ...
-#6 23.29 Unpacking python3-yaml (5.4.1-1ubuntu1) ...
-#6 23.37 Selecting previously unselected package libpipeline1:amd64.
-#6 23.37 Preparing to unpack .../05-libpipeline1_1.5.5-1_amd64.deb ...
-#6 23.38 Unpacking libpipeline1:amd64 (1.5.5-1) ...
-#6 23.44 Selecting previously unselected package binfmt-support.
-#6 23.45 Preparing to unpack .../06-binfmt-support_2.2.1-2_amd64.deb ...
-#6 23.46 Unpacking binfmt-support (2.2.1-2) ...
-#6 23.52 Selecting previously unselected package libllvm14:amd64.
-#6 23.53 Preparing to unpack .../07-libllvm14_1%3a14.0.0-1ubuntu1.1_amd64.deb ...
-#6 23.53 Unpacking libllvm14:amd64 (1:14.0.0-1ubuntu1.1) ...
-#6 23.92 Selecting previously unselected package libclang-cpp14.
-#6 23.93 Preparing to unpack .../08-libclang-cpp14_1%3a14.0.0-1ubuntu1.1_amd64.deb ...
-#6 23.93 Unpacking libclang-cpp14 (1:14.0.0-1ubuntu1.1) ...
-#6 24.16 Selecting previously unselected package libgc1:amd64.
-#6 24.17 Preparing to unpack .../09-libgc1_1%3a8.0.6-1.1build1_amd64.deb ...
-#6 24.17 Unpacking libgc1:amd64 (1:8.0.6-1.1build1) ...
-#6 24.22 Selecting previously unselected package libobjc4:amd64.
-#6 24.23 Preparing to unpack .../10-libobjc4_12.3.0-1ubuntu1~22.04_amd64.deb ...
-#6 24.24 Unpacking libobjc4:amd64 (12.3.0-1ubuntu1~22.04) ...
-#6 24.27 Selecting previously unselected package libobjc-11-dev:amd64.
-#6 24.28 Preparing to unpack .../11-libobjc-11-dev_11.4.0-1ubuntu1~22.04_amd64.deb ...
-#6 24.28 Unpacking libobjc-11-dev:amd64 (11.4.0-1ubuntu1~22.04) ...
-#6 24.35 Selecting previously unselected package libc6-i386.
-#6 24.35 Preparing to unpack .../12-libc6-i386_2.35-0ubuntu3.9_amd64.deb ...
-#6 24.36 Unpacking libc6-i386 (2.35-0ubuntu3.9) ...
-#6 24.51 Selecting previously unselected package lib32gcc-s1.
-#6 24.51 Preparing to unpack .../13-lib32gcc-s1_12.3.0-1ubuntu1~22.04_amd64.deb ...
-#6 24.51 Unpacking lib32gcc-s1 (12.3.0-1ubuntu1~22.04) ...
-#6 24.58 Selecting previously unselected package lib32stdc++6.
-#6 24.58 Preparing to unpack .../14-lib32stdc++6_12.3.0-1ubuntu1~22.04_amd64.deb ...
-#6 24.59 Unpacking lib32stdc++6 (12.3.0-1ubuntu1~22.04) ...
-#6 24.67 Selecting previously unselected package libclang-common-14-dev.
-#6 24.67 Preparing to unpack .../15-libclang-common-14-dev_1%3a14.0.0-1ubuntu1.1_amd64.deb ...
-#6 24.68 Unpacking libclang-common-14-dev (1:14.0.0-1ubuntu1.1) ...
-#6 24.96 Selecting previously unselected package llvm-14-linker-tools.
-#6 24.97 Preparing to unpack .../16-llvm-14-linker-tools_1%3a14.0.0-1ubuntu1.1_amd64.deb ...
-#6 24.97 Unpacking llvm-14-linker-tools (1:14.0.0-1ubuntu1.1) ...
-#6 25.09 Selecting previously unselected package libclang1-14.
-#6 25.10 Preparing to unpack .../17-libclang1-14_1%3a14.0.0-1ubuntu1.1_amd64.deb ...
-#6 25.10 Unpacking libclang1-14 (1:14.0.0-1ubuntu1.1) ...
-#6 25.29 Selecting previously unselected package clang-14.
-#6 25.29 Preparing to unpack .../18-clang-14_1%3a14.0.0-1ubuntu1.1_amd64.deb ...
-#6 25.30 Unpacking clang-14 (1:14.0.0-1ubuntu1.1) ...
-#6 25.37 Selecting previously unselected package clang.
-#6 25.38 Preparing to unpack .../19-clang_1%3a14.0-55~exp2_amd64.deb ...
-#6 25.38 Unpacking clang (1:14.0-55~exp2) ...
-#6 25.43 Selecting previously unselected package icu-devtools.
-#6 25.44 Preparing to unpack .../20-icu-devtools_70.1-2_amd64.deb ...
-#6 25.44 Unpacking icu-devtools (70.1-2) ...
-#6 25.52 Selecting previously unselected package libgflags2.2.
-#6 25.53 Preparing to unpack .../21-libgflags2.2_2.2.2-2_amd64.deb ...
-#6 25.53 Unpacking libgflags2.2 (2.2.2-2) ...
-#6 25.61 Selecting previously unselected package libicu-dev:amd64.
-#6 25.62 Preparing to unpack .../22-libicu-dev_70.1-2_amd64.deb ...
-#6 25.62 Unpacking libicu-dev:amd64 (70.1-2) ...
-#6 25.88 Selecting previously unselected package libncurses-dev:amd64.
-#6 25.89 Preparing to unpack .../23-libncurses-dev_6.3-2ubuntu0.1_amd64.deb ...
-#6 25.89 Unpacking libncurses-dev:amd64 (6.3-2ubuntu0.1) ...
-#6 25.97 Selecting previously unselected package libsnappy1v5:amd64.
-#6 25.97 Preparing to unpack .../24-libsnappy1v5_1.1.8-1build3_amd64.deb ...
-#6 25.98 Unpacking libsnappy1v5:amd64 (1.1.8-1build3) ...
-#6 26.02 Selecting previously unselected package librocksdb6.11.
-#6 26.02 Preparing to unpack .../25-librocksdb6.11_6.11.4-3_amd64.deb ...
-#6 26.03 Unpacking librocksdb6.11 (6.11.4-3) ...
-#6 26.23 Selecting previously unselected package librocksdb-dev.
-#6 26.23 Preparing to unpack .../26-librocksdb-dev_6.11.4-3_amd64.deb ...
-#6 26.24 Unpacking librocksdb-dev (6.11.4-3) ...
-#6 26.54 Selecting previously unselected package libtinfo-dev:amd64.
-#6 26.54 Preparing to unpack .../27-libtinfo-dev_6.3-2ubuntu0.1_amd64.deb ...
-#6 26.55 Unpacking libtinfo-dev:amd64 (6.3-2ubuntu0.1) ...
-#6 26.59 Selecting previously unselected package liburing2:amd64.
-#6 26.60 Preparing to unpack .../28-liburing2_2.1-2build1_amd64.deb ...
-#6 26.60 Unpacking liburing2:amd64 (2.1-2build1) ...
-#6 26.65 Selecting previously unselected package liburing-dev:amd64.
-#6 26.66 Preparing to unpack .../29-liburing-dev_2.1-2build1_amd64.deb ...
-#6 26.66 Unpacking liburing-dev:amd64 (2.1-2build1) ...
-#6 26.72 Selecting previously unselected package libxml2-dev:amd64.
-#6 26.72 Preparing to unpack .../30-libxml2-dev_2.9.13+dfsg-1ubuntu0.5_amd64.deb ...
-#6 26.73 Unpacking libxml2-dev:amd64 (2.9.13+dfsg-1ubuntu0.5) ...
-#6 26.79 Selecting previously unselected package llvm-14-runtime.
-#6 26.80 Preparing to unpack .../31-llvm-14-runtime_1%3a14.0.0-1ubuntu1.1_amd64.deb ...
-#6 26.81 Unpacking llvm-14-runtime (1:14.0.0-1ubuntu1.1) ...
-#6 27.27 Selecting previously unselected package libpfm4:amd64.
-#6 27.27 Preparing to unpack .../32-libpfm4_4.11.1+git32-gd0b85fb-1ubuntu0.1_amd64.deb ...
-#6 27.28 Unpacking libpfm4:amd64 (4.11.1+git32-gd0b85fb-1ubuntu0.1) ...
-#6 27.36 Selecting previously unselected package llvm-14.
-#6 27.36 Preparing to unpack .../33-llvm-14_1%3a14.0.0-1ubuntu1.1_amd64.deb ...
-#6 27.37 Unpacking llvm-14 (1:14.0.0-1ubuntu1.1) ...
-#6 27.60 Selecting previously unselected package libffi-dev:amd64.
-#6 27.60 Preparing to unpack .../34-libffi-dev_3.4.2-4_amd64.deb ...
-#6 27.61 Unpacking libffi-dev:amd64 (3.4.2-4) ...
-#6 27.68 Selecting previously unselected package python3-pygments.
-#6 27.69 Preparing to unpack .../35-python3-pygments_2.11.2+dfsg-2ubuntu0.1_all.deb ...
-#6 27.70 Unpacking python3-pygments (2.11.2+dfsg-2ubuntu0.1) ...
-#6 27.82 Selecting previously unselected package llvm-14-tools.
-#6 27.82 Preparing to unpack .../36-llvm-14-tools_1%3a14.0.0-1ubuntu1.1_amd64.deb ...
-#6 27.83 Unpacking llvm-14-tools (1:14.0.0-1ubuntu1.1) ...
-#6 27.97 Selecting previously unselected package libz3-4:amd64.
-#6 27.97 Preparing to unpack .../37-libz3-4_4.8.12-1_amd64.deb ...
-#6 27.98 Unpacking libz3-4:amd64 (4.8.12-1) ...
-#6 28.13 Selecting previously unselected package libz3-dev:amd64.
-#6 28.13 Preparing to unpack .../38-libz3-dev_4.8.12-1_amd64.deb ...
-#6 28.13 Unpacking libz3-dev:amd64 (4.8.12-1) ...
-#6 28.20 Selecting previously unselected package llvm-14-dev.
-#6 28.21 Preparing to unpack .../39-llvm-14-dev_1%3a14.0.0-1ubuntu1.1_amd64.deb ...
-#6 28.21 Unpacking llvm-14-dev (1:14.0.0-1ubuntu1.1) ...
-#6 30.62 Setting up media-types (7.0.0) ...
-#6 30.74 Setting up libpipeline1:amd64 (1.5.5-1) ...
-#6 30.75 Setting up libyaml-0-2:amd64 (0.2.2-1build2) ...
-#6 30.77 Setting up libsqlite3-0:amd64 (3.37.2-2ubuntu0.3) ...
-#6 30.79 Setting up libffi-dev:amd64 (3.4.2-4) ...
-#6 30.81 Setting up libsnappy1v5:amd64 (1.1.8-1build3) ...
-#6 30.82 Setting up libz3-4:amd64 (4.8.12-1) ...
-#6 30.85 Setting up libpfm4:amd64 (4.11.1+git32-gd0b85fb-1ubuntu0.1) ...
-#6 30.86 Setting up binfmt-support (2.2.1-2) ...
-#6 30.93 invoke-rc.d: could not determine current runlevel
-#6 30.94 invoke-rc.d: policy-rc.d denied execution of restart.
-#6 31.08 Setting up icu-devtools (70.1-2) ...
-#6 31.09 Setting up libgc1:amd64 (1:8.0.6-1.1build1) ...
-#6 31.10 Setting up libmpdec3:amd64 (2.5.1-2build2) ...
-#6 31.11 Setting up libc6-i386 (2.35-0ubuntu3.9) ...
-#6 31.13 Setting up liburing2:amd64 (2.1-2build1) ...
-#6 31.15 Setting up libc-dev-bin (2.35-0ubuntu3.9) ...
-#6 31.17 Setting up readline-common (8.1.2-1) ...
-#6 31.20 Setting up libxml2:amd64 (2.9.13+dfsg-1ubuntu0.5) ...
-#6 31.22 Setting up libgflags2.2 (2.2.2-2) ...
-#6 31.23 Setting up libz3-dev:amd64 (4.8.12-1) ...
-#6 31.25 Setting up libreadline8:amd64 (8.1.2-1) ...
-#6 31.26 Setting up libobjc4:amd64 (12.3.0-1ubuntu1~22.04) ...
-#6 31.28 Setting up libpython3.10-stdlib:amd64 (3.10.12-1~22.04.8) ...
-#6 31.30 Setting up lib32gcc-s1 (12.3.0-1ubuntu1~22.04) ...
-#6 31.31 Setting up lib32stdc++6 (12.3.0-1ubuntu1~22.04) ...
-#6 31.33 Setting up librocksdb6.11 (6.11.4-3) ...
-#6 31.34 Setting up libllvm14:amd64 (1:14.0.0-1ubuntu1.1) ...
-#6 31.36 Setting up libc6-dev:amd64 (2.35-0ubuntu3.9) ...
-#6 31.37 Setting up llvm-14-linker-tools (1:14.0.0-1ubuntu1.1) ...
-#6 31.39 Setting up libicu-dev:amd64 (70.1-2) ...
-#6 31.41 Setting up liburing-dev:amd64 (2.1-2build1) ...
-#6 31.42 Setting up libpython3-stdlib:amd64 (3.10.6-1~22.04.1) ...
-#6 31.43 Setting up librocksdb-dev (6.11.4-3) ...
-#6 31.45 Setting up libncurses-dev:amd64 (6.3-2ubuntu0.1) ...
-#6 31.46 Setting up python3.10 (3.10.12-1~22.04.8) ...
-#6 32.09 Setting up libobjc-11-dev:amd64 (11.4.0-1ubuntu1~22.04) ...
-#6 32.10 Setting up libclang1-14 (1:14.0.0-1ubuntu1.1) ...
-#6 32.12 Setting up python3 (3.10.6-1~22.04.1) ...
-#6 32.25 Setting up libxml2-dev:amd64 (2.9.13+dfsg-1ubuntu0.5) ...
-#6 32.27 Setting up llvm-14-runtime (1:14.0.0-1ubuntu1.1) ...
-#6 32.30 Setting up libclang-common-14-dev (1:14.0.0-1ubuntu1.1) ...
-#6 32.32 Setting up libclang-cpp14 (1:14.0.0-1ubuntu1.1) ...
-#6 32.33 Setting up llvm-14 (1:14.0.0-1ubuntu1.1) ...
-#6 32.35 Setting up python3-pkg-resources (59.6.0-1.2ubuntu0.22.04.2) ...
-#6 32.55 Setting up libtinfo-dev:amd64 (6.3-2ubuntu0.1) ...
-#6 32.57 Setting up clang-14 (1:14.0.0-1ubuntu1.1) ...
-#6 32.58 Setting up python3-yaml (5.4.1-1ubuntu1) ...
-#6 32.71 Setting up python3-pygments (2.11.2+dfsg-2ubuntu0.1) ...
-#6 33.21 Setting up clang (1:14.0-55~exp2) ...
-#6 33.28 Setting up llvm-14-tools (1:14.0.0-1ubuntu1.1) ...
-#6 33.30 Setting up llvm-14-dev (1:14.0.0-1ubuntu1.1) ...
-#6 33.31 Processing triggers for libc-bin (2.35-0ubuntu3.8) ...
-#6 DONE 36.2s
-
-#7 [chef 3/5] RUN ln -s /bin/g++ /bin/musl-g++
-#7 DONE 0.4s
-
-#8 [chef 4/5] RUN cargo install cargo-chef
-#8 0.608     Updating crates.io index
-#8 0.755  Downloading crates ...
-#8 0.897   Downloaded cargo-chef v0.1.71
-#8 0.981   Installing cargo-chef v0.1.71
-#8 1.067     Updating crates.io index
-#8 1.677      Locking 80 packages to latest compatible versions
-#8 1.678       Adding cargo-manifest v0.18.1 (available: v0.19.1)
-#8 1.678       Adding cargo_metadata v0.15.4 (available: v0.19.1)
-#8 1.681       Adding env_logger v0.10.2 (available: v0.11.6)
-#8 1.681       Adding fs-err v2.11.0 (available: v3.1.0)
-#8 1.681       Adding globwalk v0.8.1 (available: v0.9.1)
-#8 1.689  Downloading crates ...
-#8 1.775   Downloaded anstyle-parse v0.2.6
-#8 1.788   Downloaded equivalent v1.0.1
-#8 1.793   Downloaded autocfg v1.4.0
-#8 1.803   Downloaded is_terminal_polyfill v1.70.1
-#8 1.806   Downloaded is-terminal v0.4.15
-#8 1.808   Downloaded anstyle-query v1.1.2
-#8 1.811   Downloaded anstyle v1.0.10
-#8 1.813   Downloaded anyhow v1.0.95
-#8 1.823   Downloaded utf8parse v0.2.2
-#8 1.825   Downloaded pathdiff v0.2.3
-#8 1.826   Downloaded expect-test v1.5.1
-#8 1.828   Downloaded toml_datetime v0.6.8
-#8 1.830   Downloaded thiserror v1.0.69
-#8 1.840   Downloaded walkdir v2.5.0
-#8 1.844   Downloaded toml v0.8.20
-#8 1.850   Downloaded serde_derive v1.0.217
-#8 1.854   Downloaded serde v1.0.217
-#8 1.859   Downloaded indexmap v2.7.1
-#8 1.866   Downloaded crossbeam-utils v0.8.21
-#8 1.870   Downloaded clap v4.5.28
-#8 1.883   Downloaded toml_edit v0.22.23
-#8 1.918   Downloaded memchr v2.7.4
-#8 1.926   Downloaded hashbrown v0.15.2
-#8 1.933   Downloaded serde_json v1.0.138
-#8 1.943   Downloaded aho-corasick v1.1.3
-#8 1.951   Downloaded winnow v0.7.1
-#8 1.964   Downloaded clap_builder v4.5.27
-#8 1.973   Downloaded semver v1.0.25
-#8 1.976   Downloaded ryu v1.0.19
-#8 1.980   Downloaded quote v1.0.38
-#8 1.984   Downloaded syn v2.0.98
-#8 1.999   Downloaded regex v1.11.1
-#8 2.017   Downloaded proc-macro2 v1.0.93
-#8 2.021   Downloaded regex-syntax v0.8.5
-#8 2.032   Downloaded bstr v1.11.3
-#8 2.044   Downloaded log v0.4.25
-#8 2.047   Downloaded ignore v0.4.23
-#8 2.051   Downloaded heck v0.5.0
-#8 2.052   Downloaded env_logger v0.10.2
-#8 2.056   Downloaded crossbeam-epoch v0.9.18
-#8 2.059   Downloaded clap_derive v4.5.28
-#8 2.062   Downloaded unicode-ident v1.0.16
-#8 2.066   Downloaded thiserror-impl v1.0.69
-#8 2.068   Downloaded thiserror v2.0.11
-#8 2.076   Downloaded once_cell v1.20.3
-#8 2.079   Downloaded humantime v2.1.0
-#8 2.081   Downloaded globset v0.4.15
-#8 2.083   Downloaded cargo-platform v0.1.9
-#8 2.084   Downloaded regex-automata v0.4.9
-#8 2.108   Downloaded camino v1.1.9
-#8 2.110   Downloaded itoa v1.0.14
-#8 2.112   Downloaded cargo-manifest v0.18.1
-#8 2.114   Downloaded strsim v0.11.1
-#8 2.115   Downloaded dissimilar v1.0.9
-#8 2.118   Downloaded colorchoice v1.0.3
-#8 2.119   Downloaded clap_lex v0.7.4
-#8 2.120   Downloaded libc v0.2.169
-#8 2.157   Downloaded cargo_metadata v0.15.4
-#8 2.159   Downloaded bitflags v1.3.2
-#8 2.163   Downloaded thiserror-impl v2.0.11
-#8 2.165   Downloaded termcolor v1.4.1
-#8 2.166   Downloaded serde_spanned v0.6.8
-#8 2.168   Downloaded same-file v1.0.6
-#8 2.169   Downloaded globwalk v0.8.1
-#8 2.171   Downloaded fs-err v2.11.0
-#8 2.173   Downloaded crossbeam-deque v0.8.6
-#8 2.175   Downloaded anstream v0.6.18
-#8 2.215    Compiling proc-macro2 v1.0.93
-#8 2.215    Compiling unicode-ident v1.0.16
-#8 2.216    Compiling serde v1.0.217
-#8 2.216    Compiling memchr v2.7.4
-#8 2.831    Compiling regex-syntax v0.8.5
-#8 3.054    Compiling crossbeam-utils v0.8.21
-#8 3.723    Compiling quote v1.0.38
-#8 3.940    Compiling syn v2.0.98
-#8 4.036    Compiling aho-corasick v1.1.3
-#8 4.178    Compiling utf8parse v0.2.2
-#8 4.225    Compiling log v0.4.25
-#8 4.400    Compiling libc v0.2.169
-#8 4.668    Compiling equivalent v1.0.1
-#8 4.698    Compiling hashbrown v0.15.2
-#8 5.327    Compiling regex-automata v0.4.9
-#8 7.435    Compiling serde_derive v1.0.217
-#8 10.57    Compiling indexmap v2.7.1
-#8 11.32    Compiling anstyle-parse v0.2.6
-#8 11.46    Compiling crossbeam-epoch v0.9.18
-#8 11.61    Compiling bstr v1.11.3
-#8 11.94    Compiling is_terminal_polyfill v1.70.1
-#8 11.97    Compiling anstyle v1.0.10
-#8 12.17    Compiling thiserror v2.0.11
-#8 12.28    Compiling camino v1.1.9
-#8 12.44    Compiling serde_json v1.0.138
-#8 12.52    Compiling semver v1.0.25
-#8 12.59    Compiling colorchoice v1.0.3
-#8 12.63    Compiling anstyle-query v1.1.2
-#8 12.68    Compiling same-file v1.0.6
-#8 12.73    Compiling thiserror v1.0.69
-#8 12.78    Compiling autocfg v1.4.0
-#8 12.97    Compiling winnow v0.7.1
-#8 13.12    Compiling fs-err v2.11.0
-#8 13.28    Compiling toml_datetime v0.6.8
-#8 13.42    Compiling serde_spanned v0.6.8
-#8 13.56    Compiling walkdir v2.5.0
-#8 13.56    Compiling anstream v0.6.18
-#8 14.07    Compiling globset v0.4.15
-#8 14.34    Compiling crossbeam-deque v0.8.6
-#8 15.00    Compiling toml_edit v0.22.23
-#8 15.03    Compiling thiserror-impl v1.0.69
-#8 16.42    Compiling thiserror-impl v2.0.11
-#8 17.85    Compiling ryu v1.0.19
-#8 18.10    Compiling strsim v0.11.1
-#8 18.24    Compiling clap_lex v0.7.4
-#8 18.53    Compiling anyhow v1.0.95
-#8 18.76    Compiling heck v0.5.0
-#8 18.92    Compiling itoa v1.0.14
-#8 18.92    Compiling clap_derive v4.5.28
-#8 19.92    Compiling clap_builder v4.5.27
-#8 21.06    Compiling toml v0.8.20
-#8 21.76    Compiling is-terminal v0.4.15
-#8 21.79    Compiling ignore v0.4.23
-#8 25.44    Compiling cargo-platform v0.1.9
-#8 25.84    Compiling regex v1.11.1
-#8 25.91    Compiling termcolor v1.4.1
-#8 26.37    Compiling humantime v2.1.0
-#8 26.71    Compiling once_cell v1.20.3
-#8 26.88    Compiling dissimilar v1.0.9
-#8 27.41    Compiling bitflags v1.3.2
-#8 27.44    Compiling globwalk v0.8.1
-#8 27.75    Compiling expect-test v1.5.1
-#8 27.96    Compiling env_logger v0.10.2
-#8 28.14    Compiling cargo_metadata v0.15.4
-#8 29.61    Compiling clap v4.5.28
-#8 29.65    Compiling cargo-manifest v0.18.1
-#8 30.50    Compiling pathdiff v0.2.3
-#8 31.60    Compiling cargo-chef v0.1.71
-#8 40.09     Finished `release` profile [optimized] target(s) in 39.70s
-#8 40.11   Installing /root/.cargo/bin/cargo-chef
-#8 40.11    Installed package `cargo-chef v0.1.71` (executable `cargo-chef`)
-#8 DONE 40.2s
-
-#9 [chef 5/5] WORKDIR /usr/src/tuwunel
-#9 DONE 0.1s
-
-#10 [planner 1/4] COPY ../.docker-home/.cargo-config.toml config.toml
-#10 DONE 0.1s
-
-#11 [planner 2/4] COPY . .
-#11 DONE 11.6s
-
-#12 [planner 3/4] RUN chmod +x ./dockerfiles/scripts/**
-#12 DONE 0.4s
-
-#13 [planner 4/4] RUN --mount=type=bind,src=./.docker-home,target=.docker-home,readonly=false cargo chef prepare --recipe-path recipe.json
-#13 0.263 info: syncing channel updates for '1.84.0-x86_64-unknown-linux-gnu'
-#13 0.482 info: latest update on 2025-01-09, rust version 1.84.0 (9fc6b4312 2025-01-07)
-#13 0.482 info: downloading component 'cargo'
-#13 0.651 info: downloading component 'clippy'
-#13 0.720 info: downloading component 'rust-analyzer'
-#13 0.860 info: downloading component 'rust-src'
-#13 0.921 info: downloading component 'rust-std' for 'aarch64-unknown-linux-musl'
-#13 1.438 info: downloading component 'rust-std'
-#13 1.986 info: downloading component 'rust-std' for 'x86_64-unknown-linux-musl'
-#13 2.638 info: downloading component 'rustc'
-#13 3.929 info: downloading component 'rustfmt'
-#13 3.988 info: installing component 'cargo'
-#13 4.734 info: installing component 'clippy'
-#13 5.049 info: installing component 'rust-analyzer'
-#13 5.708 info: installing component 'rust-src'
-#13 6.172 info: installing component 'rust-std' for 'aarch64-unknown-linux-musl'
-#13 8.172 info: installing component 'rust-std'
-#13 10.43 info: installing component 'rust-std' for 'x86_64-unknown-linux-musl'
-#13 14.05 info: installing component 'rustc'
-#13 19.57 info: installing component 'rustfmt'
-#13 DONE 23.5s
-
-#14 [stage-2 1/3] COPY --from=planner /usr/src/tuwunel/config.toml config.toml
-#14 DONE 0.0s
-
-#15 [stage-2 2/3] COPY --from=planner /usr/src/tuwunel/recipe.json recipe.json
-#15 DONE 0.0s
-
-#16 [stage-2 3/3] COPY . .
-#16 DONE 13.8s
-
-#17 exporting to image
-#17 exporting layers
-#17 exporting layers 7.5s done
-#17 writing image sha256:0499fee8236c0b6d64c12359872aab7a4c8e16079179de9d5910b4f410aa549e done
-#17 naming to docker.io/library/tuwunel-base:latest done
-#17 DONE 7.5s
