@@ -4,7 +4,7 @@ extern crate rust_rocksdb as rocksdb;
 conduwuit::mod_ctor! {}
 conduwuit::mod_dtor! {}
 conduwuit::rustc_flags_capture! {}
-
+pub mod cbor;
 mod cork;
 mod de;
 mod deserialized;
