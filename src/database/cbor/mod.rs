@@ -8,6 +8,8 @@ use crate::{Engine, Map, Result as ConduwuitResult};
 /// K is the database Key
 /// V is the database Value
 /// if the key can be turned into a reference to [u8] then you should use the Raw functions
+/// Cloning this has the same behavior as [Arc]
+#[derive(Debug,Clone)]
 pub struct CborMap<K, V> {
 	map: Arc<Map>,
 	types: PhantomData<(K, V)>,
@@ -19,7 +21,7 @@ impl<K, V> CborMap<K, V> {
 		let map = Map::open(db, name)?;
 		Ok(Arc::new(CborMap { map, types: PhantomData }))
 	}
-    /// Gets the raw [crate::Map]
+    /// Gets the raw [Arc<Map>]
 	pub fn get_underlying_map(&self) -> Arc<Map> { self.map.to_owned() }
 }
 
