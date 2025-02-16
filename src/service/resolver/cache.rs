@@ -7,7 +7,7 @@ use conduwuit::{
 	Result,
 };
 use database::{Cbor, Deserialized, Map};
-use futures::{Stream, StreamExt};
+use futures::{future,Stream, StreamExt};
 use ruma::ServerName;
 use serde::{Deserialize, Serialize};
 
@@ -45,6 +45,24 @@ impl Cache {
 	}
 }
 
+#[implement(Cache)]
+pub async fn clear_destinations_async(&self) {
+	self.destinations()
+		.for_each(|x| {
+			self.destinations.remove(x.0);
+			future::ready(())
+		})
+		.await;
+}
+#[implement(Cache)]
+pub async fn clear_overrides_async(&self) {
+	self.overrides()
+		.for_each(|x| {
+			self.overrides.remove(x.0);
+			future::ready(())
+		})
+		.await;
+}
 #[implement(Cache)]
 pub fn set_destination(&self, name: &ServerName, dest: &CachedDest) {
 	self.destinations.raw_put(name, Cbor(dest));

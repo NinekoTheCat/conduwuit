@@ -17,6 +17,7 @@ crate-type = [
 ]
 
 [features]
+default = ["futures/executor"]
 brotli_compression = [
 	"reqwest/brotli",
 ]

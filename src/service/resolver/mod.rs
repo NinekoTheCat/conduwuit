@@ -7,7 +7,8 @@ mod tests;
 use std::sync::Arc;
 
 use arrayvec::ArrayString;
-use conduwuit::{utils::MutexMap, Result, Server};
+use conduwuit::{ info, utils::MutexMap, Result, Server};
+use futures::executor;
 
 use self::{cache::Cache, dns::Resolver};
 use crate::{client, Dep};
@@ -43,4 +44,14 @@ impl crate::Service for Service {
 	}
 
 	fn name(&self) -> &str { crate::service::make_name(std::module_path!()) }
+
+	fn clear_cache(&self) {
+		info!("clearing overrides & destinations in cache");
+		executor::block_on(async  {
+			self.cache.clear_destinations_async().await;
+		self.cache.clear_overrides_async().await;
+		});
+		info!("clearing hickory resolver cache");
+		self.resolver.resolver.clear_cache();
+	}
 }
