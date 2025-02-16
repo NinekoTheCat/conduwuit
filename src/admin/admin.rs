@@ -2,10 +2,7 @@ use clap::Parser;
 use conduwuit::Result;
 
 use crate::{
-	appservice, appservice::AppserviceCommand, check, check::CheckCommand, command::Command,
-	debug, debug::DebugCommand, federation, federation::FederationCommand, media,
-	media::MediaCommand, query, query::QueryCommand, room, room::RoomCommand, server,
-	server::ServerCommand, user, user::UserCommand,
+	appservice::{self, AppserviceCommand}, check::{self, CheckCommand}, command::Command, debug::{self, DebugCommand}, dns::{self, DNSCommand}, federation::{self, FederationCommand}, media::{self, MediaCommand}, query::{self, QueryCommand}, room::{self, RoomCommand}, server::{self, ServerCommand}, user::{self, UserCommand}
 };
 
 #[derive(Debug, Parser)]
@@ -46,6 +43,9 @@ pub(super) enum AdminCommand {
 	#[command(subcommand)]
 	/// - Low-level queries for database getters and iterators
 	Query(QueryCommand),
+	#[command(subcommand)]
+	/// - Commands for messing with conduwuit's resolution system
+	DNS(DNSCommand)
 }
 
 #[tracing::instrument(skip_all, name = "command")]
@@ -62,6 +62,7 @@ pub(super) async fn process(command: AdminCommand, context: &Command<'_>) -> Res
 		| Debug(command) => debug::process(command, context).await?,
 		| Query(command) => query::process(command, context).await?,
 		| Check(command) => check::process(command, context).await?,
+		| DNS(command) => dns::process(command, context).await?,
 	};
 
 	Ok(())

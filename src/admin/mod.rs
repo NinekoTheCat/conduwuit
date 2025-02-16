@@ -18,6 +18,7 @@ pub(crate) mod query;
 pub(crate) mod room;
 pub(crate) mod server;
 pub(crate) mod user;
+pub(crate) mod dns;
 
 extern crate conduwuit_api as api;
 extern crate conduwuit_core as conduwuit;
