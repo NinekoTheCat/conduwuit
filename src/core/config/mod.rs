@@ -338,6 +338,9 @@ pub struct Config {
 	/// DNS A/AAAA record lookup strategy
 	///
 	/// Takes a number of one of the following options:
+	/// 0 - auto
+	/// Queries an ipv6 only website and decides between the strategies automatically
+	/// 
 	/// 1 - Ipv4Only (Only query for A records, no AAAA/IPv6)
 	///
 	/// 2 - Ipv6Only (Only query for AAAA records, no A/IPv4)
@@ -356,7 +359,7 @@ pub struct Config {
 	/// the AAAA record contents even if the AAAA record is successful instead
 	/// of the A record.
 	///
-	/// default: 5
+	/// default: 0
 	#[serde(default = "default_ip_lookup_strategy")]
 	pub ip_lookup_strategy: u8,
 
@@ -2026,7 +2029,7 @@ fn default_dns_attempts() -> u16 { 10 }
 
 fn default_dns_timeout() -> u64 { 10 }
 
-fn default_ip_lookup_strategy() -> u8 { 5 }
+fn default_ip_lookup_strategy() -> u8 { 0 }
 
 fn default_max_request_size() -> usize {
 	20 * 1024 * 1024 // Default to 20 MB

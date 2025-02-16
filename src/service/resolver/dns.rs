@@ -1,9 +1,11 @@
-use std::{net::SocketAddr, sync::Arc, time::Duration};
+use std::{net::SocketAddr, str::FromStr, sync::Arc, time::Duration};
 
-use conduwuit::{err, Result, Server};
+use conduwuit::{config::Manager, err, warn, Result, Server,info};
 use futures::FutureExt;
-use hickory_resolver::{lookup_ip::LookupIp, TokioAsyncResolver};
-use reqwest::dns::{Addrs, Name, Resolve, Resolving};
+use hickory_resolver::{config::LookupIpStrategy, lookup_ip::LookupIp, TokioAsyncResolver};
+use reqwest::{dns::{Addrs, Name, Resolve, Resolving}, Client};
+
+use crate::client;
 
 use super::cache::{Cache, CachedOverride};
 
@@ -71,7 +73,25 @@ impl Resolver {
 		};
 		opts.authentic_data = false;
 
-		let resolver = Arc::new(TokioAsyncResolver::tokio(conf, opts));
+		let mut resolver = Arc::new(TokioAsyncResolver::tokio(conf.clone(), opts.clone()));
+		// automated lookup
+		if config.ip_lookup_strategy == 0 {
+		// check if ipv6 is a thing
+		let lookup_ip_result = futures::executor::block_on(async {
+			 lookup_ip_configure(resolver, config, cache.clone(), server.clone()).await
+
+		});
+		let strategy = match lookup_ip_result {
+			Err( error) => {
+				warn!("Could not autoconfigure because: {}, using default value of 5",error);
+
+				LookupIpStrategy::Ipv4thenIpv6
+			}
+			Ok(strat) => strat
+		};
+		opts.ip_strategy = strategy;
+		resolver = Arc::new(TokioAsyncResolver::tokio(conf, opts));
+		}
 		Ok(Arc::new(Self {
 			resolver: resolver.clone(),
 			hooked: Arc::new(Hooked { resolver, cache, server: server.clone() }),
@@ -147,4 +167,54 @@ async fn cached_to_reqwest(cached: CachedOverride) -> ResolvingResult {
 		.map(move |ip| SocketAddr::new(ip, cached.port));
 
 	Ok(Box::new(addrs))
+}
+
+/// automated ip strategy picker
+async  fn lookup_ip_configure(resolver: Arc<TokioAsyncResolver>, config: &Manager, cache:Arc<Cache>,server: Arc<Server>)-> Result<LookupIpStrategy,conduwuit::Error> {
+	let client = client::base(config)?
+	.dns_resolver( Arc::new(Hooked { resolver, cache, server: server}))
+	.build()?;
+	// we should first check ipv6
+	info!("checking for ipv6 and ipv4 compatibility");
+	let (is_ipv6,is_ipv4) = tokio::join!(is_ipv4_able(client.clone()),is_ipv6_able(client));
+	match (is_ipv6,is_ipv4) {
+		(true,true) => {
+			info!("ipv6,ipv4 allowed. Using value of 4");
+			return Ok(LookupIpStrategy::Ipv6thenIpv4);
+		}
+		(true,false) => {
+			info!("ipv6 allowed. Using value of 2");
+			return Ok(LookupIpStrategy::Ipv6Only);
+
+		}
+		(false,true) => {
+			info!("ipv4 allowed. Using value of 1");
+			return Ok(LookupIpStrategy::Ipv4Only);
+		}
+		(false,false) => {
+			return  Err(err!("Querying clients seems to be not supported for both ipv6 and ipv4, autodetection failed"));
+		}
+	}
+}
+
+async  fn is_ipv6_able (client: Client) -> bool{
+	async fn inner (client: Client) -> Option<()> {
+		let resp = client.get("https://api6.ipify.org").send().await.ok()?;
+		info!("{:#?}",resp);
+		let resp_text = resp.text().await.ok()?;
+		
+		let _ = std::net::Ipv6Addr::from_str(&resp_text).ok()?;	
+	Some(())
+	}
+	inner(client).await.is_some()
+}
+
+async  fn is_ipv4_able (client: Client) ->bool{
+	async fn inner (client: Client) -> Option<()> {
+		let resp = client.get("https://api.ipify.org").send().await.ok()?;
+		let resp_text = resp.text().await.ok()?;
+		let _ = std::net::Ipv4Addr::from_str(&resp_text).ok()?;
+	Some(())
+	}
+	inner(client).await.is_some()
 }

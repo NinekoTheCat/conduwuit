@@ -271,6 +271,9 @@
 # DNS A/AAAA record lookup strategy
 #
 # Takes a number of one of the following options:
+# 0 - auto
+# Queries an ipv6 only website and decides between the strategies automatically
+# 
 # 1 - Ipv4Only (Only query for A records, no AAAA/IPv6)
 #
 # 2 - Ipv6Only (Only query for AAAA records, no A/IPv4)
@@ -289,7 +292,7 @@
 # the AAAA record contents even if the AAAA record is successful instead
 # of the A record.
 #
-#ip_lookup_strategy = 5
+#ip_lookup_strategy = 0
 
 # Max request size for file uploads in bytes. Defaults to 20MB.
 #

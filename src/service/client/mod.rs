@@ -118,7 +118,7 @@ impl crate::Service for Service {
 	fn name(&self) -> &str { service::make_name(std::module_path!()) }
 }
 
-fn base(config: &Config) -> Result<reqwest::ClientBuilder> {
+pub(crate) fn base(config: &Config) -> Result<reqwest::ClientBuilder> {
 	let mut builder = reqwest::Client::builder()
 		.hickory_dns(true)
 		.connect_timeout(Duration::from_secs(config.request_conn_timeout))
