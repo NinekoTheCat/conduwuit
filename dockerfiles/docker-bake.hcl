@@ -1,3 +1,9 @@
+target "rocksdb" {
+    dockerfile="dockerfiles/libs/Dockerfile.rocksdb"
+    output = ["type=cacheonly"]
+}
+
+
 target "static-base" {
     dockerfile="dockerfiles/static/Dockerfile.base"
     context = "."

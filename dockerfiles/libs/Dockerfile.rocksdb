@@ -1,0 +1,8 @@
+FROM alpine:latest AS build
+RUN apk add --no-cache bzip2-dev gflags-dev liburing-dev lz4-dev snappy-dev zlib-dev zstd-dev git bash linux-headers make perl g++
+WORKDIR /rocksdb
+RUN git clone --depth=1 https://github.com/girlbossceo/rocksdb.git -b v9.9.3 .
+RUN make static_lib
+FROM scratch
+WORKDIR /
+COPY --from=build /rocksdb/librocksdb.a /librocksdb.a
