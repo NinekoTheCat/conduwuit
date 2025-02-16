@@ -1,6 +1,6 @@
 target "rocksdb" {
     dockerfile="dockerfiles/libs/Dockerfile.rocksdb"
-    output = ["type=cacheonly"]
+    tags = ["rocksdb-compiled:v9.9.3"]
 }
 
 
