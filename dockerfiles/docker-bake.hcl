@@ -8,6 +8,9 @@ target "static-base" {
     dockerfile="dockerfiles/static/Dockerfile.base"
     context = "."
     output = ["type=cacheonly"]
+    contexts = {
+        rocksdb = "target:rocksdb"
+    }
 }
 
 target "static-base-profile-test"{
