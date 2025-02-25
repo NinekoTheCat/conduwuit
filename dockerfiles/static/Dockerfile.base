@@ -3,7 +3,7 @@ USER root
 RUN --mount=type=cache,target=/usr/local/cargo/registry \
     --mount=type=cache,target=/usr/src/conduwuit/target \
     cargo install cargo-chef --target x86_64-unknown-linux-musl
-RUN apt-get update && apt-get install -y librocksdb-dev clang liburing-dev libjemalloc-dev libsnappy-dev
+RUN apt-get update && apt-get install -y librocksdb-dev clang liburing-dev libjemalloc-dev libsnappy-dev mold
 RUN ln -s /bin/g++ /bin/musl-g++
 WORKDIR /usr/src/conduwuit
 
@@ -15,15 +15,17 @@ RUN --mount=type=cache,target=/usr/local/cargo/registry \
 
 FROM chef
 ARG CARGO_PROFILE
+COPY --from=rocksdb /librocksdb.so /usr/src/conduwuit/lib/
+ENV ROCKSDB_STATIC=0
+ENV ROCKSDB_LIB_DIR=/usr/src/conduwuit/lib/
 ENV RUSTFLAGS=-Ctarget-feature=+crt-static -Crelocation-model=static \
-    -Clink-arg=-lc -Clink-arg=-lstdc++ -Clink-arg=-fuse-ld=gold \
+    -Clink-arg=-lc -Clink-arg=-lstdc++ -Clink-arg=-fuse-ld=mold \
     -Ctarget-cpu=native  -Ztune-cpu=native \
     -Ztls-model=local-exe  \
-    -Clink-arg=-luring 
+    -Clink-arg=-luring  \
+    -Clink-arg=-Lrocksdb
 COPY --from=planner /usr/src/conduwuit/recipe.json recipe.json
-RUN --mount=type=cache,target=/usr/local/cargo/registry \
-    --mount=type=cache,target=/usr/src/conduwuit/target \
-    cargo chef cook --profile ${CARGO_PROFILE} --recipe-path recipe.json --target x86_64-unknown-linux-musl 
+RUN cargo chef cook --profile ${CARGO_PROFILE} --recipe-path recipe.json --target x86_64-unknown-linux-musl 
 COPY . .
 RUN --mount=type=cache,target=/usr/local/cargo/registry \
     --mount=type=cache,target=/usr/src/conduwuit/target \

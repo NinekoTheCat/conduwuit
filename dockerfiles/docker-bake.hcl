@@ -1,6 +1,20 @@
-target "rocksdb" {
+target "rocksdb-base" {
     dockerfile="dockerfiles/libs/Dockerfile.rocksdb"
-    tags = ["rocksdb-compiled:v9.9.3"]
+}
+target "rocksdb-dynamic" {
+    inherits = ["rocksdb-base"]
+    tags = ["rocksdb-compiled-shared:v9.9.3"]
+        args = {
+        ROCKS_DB_TARGET = "shared_lib"
+    }
+}
+
+target "rocksdb-static" {
+    inherits = ["rocksdb-base"]
+    tags = ["rocksdb-compiled-static:v9.9.3"]
+    args = {
+        ROCKS_DB_TARGET = "static_lib"
+    }
 }
 
 
@@ -9,7 +23,7 @@ target "static-base" {
     context = "."
     output = ["type=cacheonly"]
     contexts = {
-        rocksdb = "target:rocksdb"
+        rocksdb = "target:rocksdb-dynamic"
     }
 }
 
